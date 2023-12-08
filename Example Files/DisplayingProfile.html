@@ -1,0 +1,229 @@
+<!-- filename: displayStudent.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Student Server</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    /* Custom CSS for navbar hover effect */
+    .navbar-nav>li:hover {
+      background-color: #665a44; /* Change this color to the desired hover color */
+    }
+    .navbar-nav>li:hover a {
+      color: #fff; /* Change text color on hover if needed */
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Student Registration</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="index2.html">Home</a></li>
+      <li><a href="addStudent.html">Add</a></li>
+      <li><a href="updateStudent.html">Update</a></li>
+      <li><a href="displayStudent.html">Display</a></li>
+      <li><a href="listStudent.html">List</a></li>
+      <li><a href="searchStudent.html">Search</a></li>
+      <li><a href="deleteStudent.html">Delete</a></li>
+    </ul>
+    <!-- Add the search bar to the navbar -->
+    <form class="navbar-form navbar-right" role="search" id="searchForm">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search by last name" id="searchInput">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+<div>
+
+</div>
+</div>
+</nav>
+  <a href="index.html">Main Menu</a>
+  <p>Display a Student</p>
+
+  <label for="record_id">Record ID:</label>
+  <input type="text" id="record_id" name="record_id"><br><br>
+
+  <button onclick="displayStudent()">Submit</button>
+  <br>
+  <br>
+  <div id="mydiv" name="mydiv"></div>
+  <script>
+
+    function displayStudent() {
+      var record = $("#record_id").val();
+      
+    
+//Updated ajax
+      $.ajax({
+        url: "/students/"+record,
+        type: "get",
+        data: {
+          record_id: record
+        },
+        success: function (response) {
+          console.log(response);
+          var student_info = JSON.parse(response);
+          $("#mydiv").text(JSON.stringify(student_info, null, 2));
+        },
+        error: function (xhr) {
+          console.log(xhr.responseText)
+          $("#mydiv").text('error: ' + xhr.responseText);
+        }
+      });
+    }
+
+  </script>
+<script>
+  // JavaScript to handle the search functionality
+  document.getElementById('searchForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting
+    const searchInput = document.getElementById('searchInput').value.toLowerCase();
+    const navbarItems = document.querySelectorAll('.nav.navbar-nav li a');
+
+    // Loop through each navbar item and compare with the search input
+    for (const item of navbarItems) {
+      if (item.innerText.toLowerCase() === searchInput) {
+        window.location.href = item.getAttribute('href'); // Navigate to the matched URL
+        return;
+      }
+    }
+
+   
+  });
+</script>
+
+<center><div id="searchResults"></div></center>
+
+<script>
+  // JavaScript to handle the search functionality
+  document.getElementById('searchForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting
+    const searchInput = document.getElementById('searchInput').value;
+
+    // Call the searchStudent function with the entered last name
+    searchbarStudent(searchInput);
+  });
+
+  function searchbarStudent(lastName) {
+    $.ajax({
+      url: "/students/search/" + lastName,
+      type: "get",
+      data: {
+        last_name: lastName
+      },
+      success: function (response) {
+        console.log(response);
+        // Display search results in the "searchResults" div
+        $("#searchResults").html("Last Name Search Results: "+JSON.stringify(response));
+      },
+      error: function (xhr) {
+        console.log(xhr.responseText);
+        $("#searchResults").text('Error: ' + xhr.responseText);
+      }
+    });
+  }
+</script>
+</body>
+
+</html>
+
+<!--my get students page-->
+<!-- filename: updateVotes.html -->
+<!--<!DOCTYPE html>
+<html>
+<head>
+<title>Display One Student by Search Id</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Student Registry</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="index2.html">Home</a></li>
+        <li><a href="addStudent.html">Add</a></li>
+        <li><a href="updateStudent.html">Update</a></li>
+        <li class="active"><a href="displayStudent.html">View</a></li>
+        <li><a href="deleteStudent.html">Delete</a></li>
+        <li><a href="listStudents.html">List</a></li>
+    </ul>
+    <div class="form-group">
+        <input type="text" id = "lname" class="form-control" placeholder="Search by last name" name="lname">
+      </div>
+      <button type="submit" class="btn btn-default" onclick="searchStudents()">Submit</button>
+  </div>
+  </div>
+</nav>
+
+<body>
+
+  
+
+  <label for="record_id">Record_id:</label>
+  <input type="text" id="record_id" name="record_id"><br><br>
+
+  <button onclick="displayStudent()">Display a student by id</button>
+  <br>
+  <br>
+  <div id="mydiv" name="mydiv"></div>
+  <script>
+
+    function displayStudent() {
+       // console.log("button pushed");
+      var id = $("#record_id").val();
+      $.ajax({
+        url: "http://localhost:5678/students/" + id,
+        type: "get",
+        data: {
+          record_id: id,
+        },
+        success: function(response) {
+          var student_info = JSON.parse(response);
+          $("#mydiv").text(JSON.stringify(student_info, null, 2));
+        },
+        error: function(xhr) {
+          $("#mydiv").text('error: ' + xhr);
+        }
+      });
+    }
+    
+    function searchStudents() {
+       // console.log("button pushed");
+      var lname_val = $("#lname").val();
+      $.ajax({
+        url: "http://localhost:5678/students/search/" + lname_val,
+        type: "get",
+        data: {
+          last_name: lname_val
+        },
+        success: function(response) {
+          //var student_info = JSON.parse(response);
+          $("#mydiv").text(JSON.stringify(response));
+        },
+        error: function(xhr) {
+          $("#mydiv").text('error: ' + xhr);
+        }
+      });
+    }
+
+  </script>
+
+</body>
+</html>-->

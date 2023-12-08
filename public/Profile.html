@@ -1,0 +1,266 @@
+<!-- /*
+* Template Name: Property
+* Template Author: Untree.co
+* Template URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Untree.co" />
+    <link rel="shortcut icon" href="favicon.png" />
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="bootstrap, bootstrap5" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="fonts/icomoon/style.css" />
+    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css" />
+
+    <link rel="stylesheet" href="css/tiny-slider.css" />
+    <link rel="stylesheet" href="css/aos.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="stylesheet.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <title>
+      Re-Find
+    </title>
+  </head>
+  <body onload="displayStudents()">
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close">
+          <span class="icofont-close js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <nav class="site-nav">
+      <div class="container">
+        <div class="menu-bg-wrap">
+          <div class="site-navigation">
+            <a href="main.html" class="logo m-0 float-start">Re-Find</a>
+
+            <ul
+              class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end"
+            >
+              <li><a href="main.html">Home</a></li>
+              <li><a href="Leaderboard.html">Leaderboard</a></li>
+              <li><a href="RecycleMap.html">Map</a></li>
+              <li><a href="Education.html">Education</a></li>
+              <li class="active"><a href="Profile.html">Profile</a></li>
+              <li><a href="javascript:void(0);" onclick="logoutUser()">Logout</a></li>
+            </ul>
+
+            <a
+              href="#"
+              class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none"
+              data-toggle="collapse"
+              data-target="#main-navbar"
+            >
+              <span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div
+      class="hero page-inner overlay"
+      style="background-image: url('https://cnr.ncsu.edu/news/wp-content/uploads/sites/10/2020/12/recycling.stock_.p1.jpg');"
+    >
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-lg-9 text-center mt-5">
+            <h1 class="heading" data-aos="fade-up" id="profile">Profile</h1>
+
+            <nav
+              aria-label="breadcrumb"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+            <!--  <ol class="breadcrumb text-center justify-content-center">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li
+                  class="breadcrumb-item active text-white-50"
+                  aria-current="page"
+                >
+                  Profile
+                </li>
+              </ol>-->
+            </nav>
+            <div class="container3" data-aos="fade-up">
+              <div class="outer" data-aos="fade-up">
+                <img class = outer src="profileimg5-4.png" alt="default" data-aos="fade-up"/>
+                <div class="inner" id="points">
+                <!--<input class="inputfile" type="file" name="pic" accept="image/*">-->
+                <!--<label><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d=""></path></svg></label>
+                --> </div>
+              </div>
+            </div>
+         <!--   <img id="profilePic" src="profileimg5.png" width="180" height="180" alt="profile_image" style="border-radius: 50%;" data-aos="fade-up"/>
+         --> </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+                  <form action="#">
+                      <div class="row">
+                        <h2 class="font-weight-bold heading text-primary mb-4">Name</h2>
+                          <div class="col-6 mb-3">
+                              <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" />
+                          </div>
+                          <div class="col-6 mb-3">
+                              <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" />
+                          </div>
+                          <h2 class="font-weight-bold heading text-primary mb-4">Email</h2>
+                          <div class="col-12 mb-3">
+                              <input type="email" class="form-control" id="email" name="email" placeholder="Email" />
+                          </div>
+                          <h2 class="font-weight-bold heading text-primary mb-4">Username</h2>
+                          <div class="col-12 mb-3">
+                              <input type="text" class="form-control" id="username" name="username"placeholder="Username" />
+                          </div>
+                          <div><h2 class="font-weight-bold heading text-primary mb-4">Password</h2></div>
+                          <div class="col-12 mb-3">
+                              <input type="password" class="form-control" id="password" name="password"placeholder="Password" />
+                          </div>
+                          <div>
+                          <input type="checkbox" class= "checkbox" onclick="showPass()"> Show Password
+                          </div>
+                        <!--  <div class="col-12 mb-3">
+                              <input type="text" class="form-control" id="password" name="password" placeholder="Password" />
+                          </div>-->
+                          <br><br>
+                          <div class="col-12">
+                              <div onclick="updateUser()" value="Update Profile" class="btn btn-primary">Update!</div>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+  <br>
+  <div class="section" style="text-align: center;">
+    <button type="button" id="deleteProfile" onclick="deleteAccount()">Delete Account</button>
+  </div>
+    <script>
+      //displayStudents();
+      async function displayStudents() {
+      try{
+        const current_user = await getCurrentUserInfo("Profile");
+        console.log(current_user);
+        document.getElementById("firstName").value = current_user.first_name;
+        document.getElementById("lastName").value = current_user.last_name;
+        document.getElementById("username").value = current_user.username;
+        document.getElementById("email").value = current_user.email;
+        document.getElementById("password").value = current_user.password;
+        console.log(current_user)
+        if (current_user.point_num >= 100){
+          document.getElementById("points").style.fontSize = '25px';
+          document.getElementById("points").innerHTML = current_user.point_num;
+        }
+        else {
+          document.getElementById("points").innerHTML = current_user.point_num;
+        }
+       }
+      catch(error){
+        console.log("couldnt get the info, error :", error || "Uknown error");
+      } 
+    }
+
+      function changeProfilePic(){
+        document.getElementById("profilePic").src="sponge.jpg";
+        console.log("clicked");
+      }
+
+      function showPass(){
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+          x.type = "text";
+        } else {
+          x.type = "password";
+        }
+      }
+      async function updateUser(){
+        var current_user = await getCurrentUserInfo("Profile");
+        var record_id = current_user.record_id;
+        var fname_val = $("#firstName").val();
+        var lname_val = $("#lastName").val();
+        var email_val = $("#email").val();
+        var username_val = $("#username").val();
+        var pass_val = $("#password").val();
+        //var password_val = $("#password").val();
+        $.ajax({
+        url: "/users/" + record_id,
+        type: "put",
+        data: {
+            record_id: record_id,
+           first_name: fname_val,
+           last_name: lname_val,
+           email: email_val,
+           username: username_val,
+           password: pass_val
+        },
+        success: function (response) {
+          console.log(response);
+          console.log("it worked");
+          alert("Profile Updated!");
+        },
+        error: function (xhr) {
+          console.log(xhr.responseText);
+        }
+      });
+      }
+
+     async function deleteAccount(){
+        var yn = prompt("Are you sure you want to delete your account? (Enter yes or no)");
+        if (yn == "yes" || yn == "y"){
+          var current_user = await getCurrentUserInfo("Profile");
+        var record_id = current_user.record_id;
+        //sessionStorage.removeItem("me");
+        window.location.assign("/index.html");
+        $.ajax({
+          url: "/users/" + record_id,
+          type: "delete",
+          data: {
+            record_id: record_id
+        },
+        success:function(response){
+          console.log("user deleted");
+        },
+        error: function(xhr){
+          console.log(xhr);
+        }})
+        }
+        else {
+          alert("We're happy your staying with us!");
+        }
+        logoutUser();
+      }
+  
+    </script>
+   <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/tiny-slider.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/counter.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="webpagemethods.js"></script>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+.container3 {
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .outer {
+    width: auto !important;
+    height: 100% !important;
+    max-width: 150px !important; /* any size */
+    max-height: 150px !important; /* any size */
+    margin: auto;
+    /*background-image: url("profileimg5-3.png");*/
+    border-radius: 100%;
+    position: relative;
+   /* border-style: solid;
+    border-color: #FFFFFF;*/
+    }
+    
+  .inner {
+    /*background-size: 50px 50px;
+    background-position: center;*/
+    background-color: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    justify-content: center;
+    font-size: 30px;
+    color: rgb(22,59,12);
+    border-color: rgb(22,59,12);
+  border-style: solid;
+  margin: auto;
+  }
+  .checkbox {
+    font-size: 30px;
+  }
+  .inner:hover {
+    opacity: 0.5;
+  }
+  .inputfile {
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: 1;
+      width: 50px;
+      height: 50px;
+  }
+  .inputfile + label {
+      font-size: 1.25rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: inline-block;
+      overflow: hidden;
+      width: 50px;
+      height: 50px;
+      pointer-events: none;
+      cursor: pointer;
+      line-height: 50px;
+      text-align: center;
+  }
+  .inputfile + label svg {
+      fill: #fff;
+  }

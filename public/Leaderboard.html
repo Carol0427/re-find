@@ -1,0 +1,279 @@
+<!-- /*
+* Template Name: Property
+* Template Author: Untree.co
+* Template URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Untree.co" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="shortcut icon" href="favicon.png" />
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="bootstrap, bootstrap5" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="fonts/icomoon/style.css" />
+    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css" />
+
+    <link rel="stylesheet" href="css/tiny-slider.css" />
+    <link rel="stylesheet" href="css/aos.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <title>
+      Re-Find
+    </title>
+  </head>
+  <body onload="displayUsers()" style="padding-bottom: 50px;">
+    <nav class="site-nav">
+      <div class="container">
+        <div class="menu-bg-wrap">
+          <div class="site-navigation">
+            <a href="main.html" class="logo m-0 float-start">Re-Find</a>
+
+            <ul
+              class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end"
+            >
+            <li><a href="main.html">Home</a></li>
+            <li class="active"><a href="Leaderboard.html">Leaderboard</a></li>
+            <li><a href="RecycleMap.html">Map</a></li>
+            <li><a href="Education.html">Education</a></li>
+            <li><a href="Profile.html">Profile</a></li>
+            <li><a href="javascript:void(0);" onclick="logoutUser()">Logout</a></li>
+            </li>
+            </ul>
+            <!-- <a
+              href="#"
+              class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none"
+              data-toggle="collapse"
+              data-target="#main-navbar"
+            > -->
+              <span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+
+    <div class="rectangle" id="board" data-aos="float-up">
+      <div class="soft-rectangle">
+        <div class="soft-rectangle-text-main" id="title">
+          <h1>Leaderboard</h1>
+
+        </div>
+      </div>
+    </div>
+  <div class="hero page-inner overlay" style="background-image: url('images/Recycle_us.gif')"></div>
+  <!-- <div class="hero img overlay" style="background-image: url('images/Recycle_us.gif')"></div>  -->
+
+
+  <!-- <div class="container" style="bottom: 100px">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-9 text-center mt-5">
+        <h1 class="heading" data-aos="fade-up"></h1>
+        <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">
+          <ol class="breadcrumb text-center justify-content-center">
+            <li class="breadcrumb-item active text-white-50" aria-current="page"></li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div> -->
+
+</div>
+</body>
+</html>
+    <style>
+    .box {
+      display: flex;
+
+    }
+      .rectangle {
+        position: absolute;
+        /*top: 190px;*//* Adjust the vertical position as needed */
+        left: 50%; /* Adjust the horizontal position as needed */
+        transform: translate(-50%, -50%);
+        width: 40%; /* Adjust the width as needed */
+        height: auto;  /*Adjust the height as needed */
+        border-radius: 20px;
+        background-color: #195b12; /* Change the background color and opacity as needed */
+        z-index: 2; /* Set a higher z-index to make sure it appears over the GIF */
+        padding-top: 20px;
+        padding-bottom: 10px;
+      }
+
+      .soft-rectangle {
+        width: 80%;
+        height: auto;
+        background-color: rgb(28,175,77);
+        border-radius: 20px;
+        z-index: 3;
+        margin: 0 auto;
+      }
+
+
+      .soft-rectangle-text-main {
+        text-align: center;
+        padding-top: 35px;
+        padding-bottom: 35px;
+      }
+
+      .inner-rectangle-text {
+        /*text-align: center;*/
+        color: #FFFFFF;
+        flex-grow: 1;
+
+      }
+      .inner-rectangle-img {
+        margin-left: auto;
+        height: 90%;
+        width: 50px;
+        border-radius: 30%;
+        padding-right: 10px;
+      }
+        .inner-rectangle{
+          display: flex;
+          position: relative;
+          background-color: #079a2c; /* Change the background color of inner rectangles */
+          border-radius: 20px;
+          width: 80%; /* Adjust the width of inner rectangles */
+          height: 50px; /* Adjust the height of inner rectangles */
+          margin: 0 auto;
+          /*padding-top: 10px;*/
+          margin-top: 10px;
+          align-items: center;
+          text-align: left;
+          justify-content: center;
+          font-size: 20px;
+          padding-left: 15px;
+        }
+      </style>
+   <script>
+          //  var top = parseFloat(window.getComputedStyle("board").getPropertyValue("top"));
+         // document.getElementById("board").style.top = "800px";
+//console.log(top);
+   function displayUsers(){
+      //API call to get all users
+      var length;
+      $.ajax({
+        url: "/users",
+        type: "get",
+        data: {
+
+        },
+        success: async function(response){
+        length = response.users.length;
+        //console.log(length);
+        var arr = [];
+        for (var i = 0;i<length;i++){
+          arr[i] = response.users[i];
+        }
+        console.log(arr);
+        //Adds all users to array in descending order by point number
+        selectionSort(arr, length);
+        //dynamically adds more slots depending on user amount
+        const parentDiv1 = document.getElementById("board");
+
+         // console.log(newTop);
+        const parentDiv2 = document.getElementsByClassName("inner-rectangle");
+        for (var i =0;i<length;i++){
+          //creates rectangle slot div
+          //parentDiv1.style.top = "800px";
+        //    var currentTop = window.getComputedStyle(document.getElementById('board')).getPropertyValue("top");
+        //    var currentTopString = "";
+        //     for (var i = 0;i<3;i++){
+        //   currentTopString += currentTop[i];
+        //  }
+        // var newTop = parseInt(currentTopString);
+        //  console.log(newTop);
+        //  var newTopString = newTop.toString() + "px";
+        //    console.log(newTopString);
+        //  parentDiv1.style.top = newTopString;
+          // console.log(top);
+          // if (i == 2){
+          //   parentDiv1.style.setProperty("top", "1000", "important");
+          // }
+          // else if (i == 3){
+
+          // }
+          // parentDiv1.style.setProperty("top", "1000", "important");
+          const div = document.createElement("div");
+          div.className = "inner-rectangle";
+          parentDiv1.appendChild(div);
+          //creates text in slot div
+          const p = document.createElement("div");
+          p.className = "inner-rectangle-text";
+          //gets current user to bold their text
+          try {
+          var current_user = await getCurrentUserInfo("Profile");
+          }
+          catch(error){
+            console.log("error: ", error || "could not identify the error");
+          }
+          if (current_user.record_id == arr[i].record_id){
+            p.style.fontWeight = 'bold';
+          }
+          p.innerHTML = arr[i].username + " - " + arr[i].point_num;
+
+          parentDiv2[i].appendChild(p);
+
+          //creates img in slot div
+          const img = document.createElement("img");
+          img.className = "inner-rectangle-img";
+          //Adds MEDALSSS
+          if(i == 0){
+            img.src="firstplace-bkgrd.png";
+            parentDiv2[i].appendChild(img);
+          }
+          else if (i == 1){
+            img.src="secondplace-bkgrd.png";
+            parentDiv2[i].appendChild(img);
+          }
+          else if(i == 2){
+            img.src="thirdplace-bkgrd.png";
+            parentDiv2[i].appendChild(img);
+          }
+
+        }
+       // console.log(length+5);
+      var offset = length*40;
+      console.log(offset);
+      var top = offset+190;
+      console.log(top);
+      var topString = top.toString() + "px";
+      console.log(topString);
+      document.getElementById("board").style.top = topString;
+        },
+        error: function(xhr) {
+          console.log(xhr);
+        }
+      });
+
+      // console.log(offset);
+      //
+    }
+
+   </script>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/tiny-slider.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/counter.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="webpagemethods.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!-- filename: addUser.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Project Server</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+
+    <a href="Homepage.html">Home</a>
+    <p>Re-Find</p>
+
+    <p>Please fill in the information to sign up for Re-Find!</p>
+    <label for="fullName">Enter Full Name:</label>
+    <input type="text" id="fullName" name="fullName"><br><br>
+
+    <label for="username">Enter Username:</label>
+    <input type="text" id="username" name="username"><br><br>
+
+    <label for="password">Enter Password:</label>
+    <input type="text" id="password" name="password"><br><br>
+
+    <label for="age">Enter Age:</label>
+    <input type="text" id="age" name="age"><br><br>
+
+    <button onclick="addStudent()">Sign Up!</button>
+    <br>
+    <br>
+    <div id="mydiv" name="mydiv"></div>
+    <script>
+
+        function addStudent() {
+            var fullName_val = $("#fullName").val();
+            var username_val = $("#username").val();
+            var password_val = $("#password").val();
+            var age_val = $("#age").val();
+
+            $.ajax({
+                url: "/users",//Updated ajax
+                type: "post",
+                data: {
+                    full_name: fullName_val,
+                    username: username_val,
+                    password: password_val,
+                    age: age
+                },
+                success: function (response) {
+                    console.log(response)
+                    $("#mydiv").text(response.message);
+                },
+                error: function (xhr) {
+                    console.log(xhr.responseText)
+                    $("#mydiv").text('error: ' + xhr.responseText);
+                }
+            });
+        }
+
+    </script>
+</body>
+
+</html>

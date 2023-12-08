@@ -1,0 +1,120 @@
+<!-- filename: addStudent.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Student Server</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+  <a href="index.html">Home</a>
+  <p>Re-Find</p>
+
+  <p>Please fill in the information to sign up for Re-Find!</p>
+  <label for="name">Enter Full Name:</label>
+  <input type="text" id="fname" name="fname"><br><br>
+
+  <label for="name">Enter Username:</label>
+  <input type="text" id="lname" name="lname"><br><br>
+
+  <label for="gpa">Enter Password:</label>
+  <input type="text" id="gpa" name="gpa"><br><br>
+
+  <label for="enrolled">Enter Age:</label>
+  <input type="text" id="enrolled" name="enrolled"><br><br>
+
+  <button onclick="addStudent()">Sign Up!</button>
+  <br>
+  <br>
+  <div id="mydiv" name="mydiv"></div>
+  <script>
+
+    function addStudent() {
+      var fname_val = $("#fname").val();
+      var lname_val = $("#lname").val();
+      var gpa_val = $("#gpa").val();
+      var enrolled_val = $("#enrolled").val();
+
+      $.ajax({
+        url: "/students",//Updated ajax
+        type: "post",
+        data: {
+          first_name: fname_val,
+          last_name: lname_val,
+          gpa: gpa_val,
+          enrolled: enrolled_val
+        },
+        success: function (response) {
+          console.log(response)
+          $("#mydiv").text(response.message);
+        },
+        error: function (xhr) {
+          console.log(xhr.responseText)
+          $("#mydiv").text('error: ' + xhr.responseText);
+        }
+      });
+    }
+
+  </script>
+
+<script>
+  // JavaScript to handle the search functionality
+  document.getElementById('searchForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting
+    const searchInput = document.getElementById('searchInput').value.toLowerCase();
+    const navbarItems = document.querySelectorAll('.nav.navbar-nav li a');
+
+    // Loop through each navbar item and compare with the search input
+    for (const item of navbarItems) {
+      if (item.innerText.toLowerCase() === searchInput) {
+        window.location.href = item.getAttribute('href'); // Navigate to the matched URL
+        return;
+      }
+    }
+
+    
+  });
+</script>
+
+<center><div id="searchResults"></div></center>                                         
+
+<script>
+  // JavaScript to handle the search functionality
+  document.getElementById('searchForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting
+    const searchInput = document.getElementById('searchInput').value;
+
+    // Call the searchStudent function with the entered last name
+    searchbarStudent(searchInput);
+  });
+
+  function searchbarStudent(lastName) {
+    $.ajax({
+      url: "/students/search/" + lastName,//Here is the function
+      type: "get",
+      data: {
+        last_name: lastName
+      },
+      success: function (response) {
+        console.log(response);
+        // Display search results in the "searchResults" div
+        $("#searchResults").html("Last Name Search Results: "+JSON.stringify(response));
+      },
+      error: function (xhr) {
+        console.log(xhr.responseText);
+        $("#searchResults").text('Error: ' + xhr.responseText);
+      }
+    });
+  }
+</script>
+</body>
+
+</html>
+
+<script src="webpagemethods.js"></script>
